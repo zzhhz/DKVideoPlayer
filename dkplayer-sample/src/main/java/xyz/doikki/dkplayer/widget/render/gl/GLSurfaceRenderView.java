@@ -25,9 +25,6 @@ import android.os.Handler;
 import android.view.Surface;
 import android.view.View;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-
 import com.google.android.exoplayer2.util.GlUtil;
 
 import java.util.concurrent.atomic.AtomicBoolean;
@@ -39,6 +36,8 @@ import javax.microedition.khronos.egl.EGLDisplay;
 import javax.microedition.khronos.egl.EGLSurface;
 import javax.microedition.khronos.opengles.GL10;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import xyz.doikki.videoplayer.player.AbstractPlayer;
 import xyz.doikki.videoplayer.render.IRenderView;
 import xyz.doikki.videoplayer.render.MeasureHelper;
@@ -284,7 +283,11 @@ public final class GLSurfaceRenderView extends GLSurfaceView implements IRenderV
 
         @Override
         public synchronized void onSurfaceCreated(GL10 gl, EGLConfig config) {
-            texture = GlUtil.createExternalTexture();
+            try {
+                texture = GlUtil.createExternalTexture();
+            } catch (GlUtil.GlException e) {
+                throw new RuntimeException(e);
+            }
             surfaceTexture = new SurfaceTexture(texture);
             surfaceTexture.setOnFrameAvailableListener(
                     surfaceTexture -> {

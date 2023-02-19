@@ -17,17 +17,16 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
+import java.util.ArrayList;
+
 import androidx.annotation.DrawableRes;
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
-
 import xyz.doikki.dkplayer.R;
 import xyz.doikki.dkplayer.util.DataUtil;
 import xyz.doikki.videocontroller.StandardVideoController;
 import xyz.doikki.videoplayer.player.VideoView;
-
-import java.util.ArrayList;
 
 /**
  * Android O PiP demo
@@ -146,7 +145,7 @@ public class AndroidOPiPActivity extends AppCompatActivity {
                         AndroidOPiPActivity.this,
                         requestCode,
                         new Intent(ACTION_MEDIA_CONTROL).putExtra(EXTRA_CONTROL_TYPE, controlType),
-                        0);
+                        PendingIntent.FLAG_IMMUTABLE);
         final Icon icon = Icon.createWithResource(AndroidOPiPActivity.this, iconId);
         actions.add(new RemoteAction(icon, title, title, intent));
 
