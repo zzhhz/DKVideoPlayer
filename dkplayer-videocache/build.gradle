@@ -9,8 +9,17 @@ android {
         minSdkVersion project.ext.minSdkVersion
         targetSdkVersion project.ext.targetSdkVersion
     }
+    publishing {
+        multipleVariants('release') {
+            withSourcesJar()
+            withJavadocJar()
+            allVariants()
+        }
+    }
 }
 
 ext {
     PUBLISH_ARTIFACT_ID = 'videocache'
 }
+
+apply from: '../publication.gradle'

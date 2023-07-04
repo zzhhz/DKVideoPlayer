@@ -13,6 +13,13 @@ android {
         sourceCompatibility JavaVersion.VERSION_11
         targetCompatibility JavaVersion.VERSION_11
     }
+    publishing {
+        multipleVariants('release') {
+            withSourcesJar()
+            withJavadocJar()
+            allVariants()
+        }
+    }
 }
 
 dependencies {
@@ -28,3 +35,5 @@ dependencies {
 ext {
     PUBLISH_ARTIFACT_ID = 'player-exo'
 }
+
+apply from: '../../publication.gradle'

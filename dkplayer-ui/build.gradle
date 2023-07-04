@@ -9,6 +9,13 @@ android {
         minSdkVersion project.ext.minSdkVersion
         targetSdkVersion project.ext.targetSdkVersion
     }
+    publishing {
+        multipleVariants('release') {
+            withSourcesJar()
+            withJavadocJar()
+            allVariants()
+        }
+    }
 }
 
 dependencies {
@@ -20,3 +27,5 @@ dependencies {
 ext {
     PUBLISH_ARTIFACT_ID = 'dkplayer-ui'
 }
+
+apply from: '../publication.gradle'
